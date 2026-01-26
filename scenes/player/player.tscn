@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=3 uid="uid://bvj3uq2f1rfyn"]
+
+[ext_resource type="Texture2D" uid="uid://cdwgwm5jc1ejp" path="res://assets/tank/tankBody_bigRed_outline.png" id="1_dovo2"]
+[ext_resource type="Script" uid="uid://d4ihes32w322m" path="res://scenes/player/player.gd" id="1_gmlin"]
+[ext_resource type="Texture2D" uid="uid://m2misqtoyrny" path="res://assets/tank/specialBarrel3_outline.png" id="2_gmlin"]
+[ext_resource type="PackedScene" uid="uid://bykpmiqhe63bo" path="res://scenes/player_bullet/player_bullet.tscn" id="2_lvxji"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dovo2"]
+size = Vector2(54, 46)
+
+[node name="Player" type="Area2D" groups=["Player"]]
+script = ExtResource("1_gmlin")
+bullet_scene = ExtResource("2_lvxji")
+
+[node name="Base" type="Sprite2D" parent="."]
+texture = ExtResource("1_dovo2")
+
+[node name="Gun" type="Sprite2D" parent="."]
+texture = ExtResource("2_gmlin")
+offset = Vector2(8, 0)
+
+[node name="Marker2D" type="Marker2D" parent="Gun"]
+position = Vector2(32, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_dovo2")
