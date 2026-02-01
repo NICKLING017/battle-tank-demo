@@ -3,16 +3,18 @@ extends Area2D
 var direction: Vector2 = Vector2.ZERO # 方向
 var target_pos: Vector2 = Vector2.ZERO # 鼠标指向位置
 var speed: float = 0 # 移动速度
+var health: int = 10 # 初始血量
 
 @export var max_speed: float = 300 ## 最大移动速度
 @export var bullet_scene: PackedScene ## 炮弹场景
 
 @onready var gun: Sprite2D = $Gun
 @onready var marker_2d: Marker2D = $Gun/Marker2D
+@onready var shoot_sound: AudioStreamPlayer = $ShootSound
 
 
 func _ready() -> void:
-	pass
+	Gamemanager.player_killed.connect(on_player_killed)
 
 
 func _process(delta: float) -> void:
@@ -47,9 +49,22 @@ func target():
 
 func shoot():
 	if Input.is_action_just_pressed("shoot"):
+		shoot_sound.play()
 		print("发射子弹" + str(target_pos))
 		var bullet = bullet_scene.instantiate() as Area2D
 		bullet.global_position = marker_2d.global_position
 		bullet.look_at(target_pos)
 		bullet.top_level = true
 		add_child(bullet)
+
+
+func reduce_health():
+	if health > 0:
+		health -=1
+		Gamemanager.update_health_ui.emit(health)
+	if health <= 0:
+		Gamemanager.player_killed.emit()
+
+
+func on_player_killed():
+	set_process(false) # 停止玩家进程

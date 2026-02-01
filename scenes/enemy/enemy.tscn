@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cm7b1kfc8xvbe"]
+[gd_scene format=3 uid="uid://cm7b1kfc8xvbe"]
 
 [ext_resource type="Script" uid="uid://c5cotvtr7723v" path="res://scenes/enemy/enemy.gd" id="1_40wdo"]
 [ext_resource type="Texture2D" uid="uid://du2o1a03pimcu" path="res://assets/enemy/towerDefense_tile181.png" id="1_a3pup"]
@@ -8,23 +8,23 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_a3pup"]
 radius = 29.0
 
-[node name="Enemy" type="Area2D" groups=["Enemy"]]
+[node name="Enemy" type="Area2D" unique_id=1190061602 groups=["Enemy"]]
 script = ExtResource("1_40wdo")
 bullet_scene = ExtResource("2_tjssy")
 
-[node name="Base" type="Sprite2D" parent="."]
+[node name="Base" type="Sprite2D" parent="." unique_id=1230125152]
 texture = ExtResource("1_a3pup")
 
-[node name="Gun" type="Sprite2D" parent="."]
+[node name="Gun" type="Sprite2D" parent="." unique_id=1912628789]
 texture = ExtResource("2_40wdo")
 offset = Vector2(10, 0)
 
-[node name="Marker2D" type="Marker2D" parent="Gun"]
+[node name="Marker2D" type="Marker2D" parent="Gun" unique_id=1836305647]
 position = Vector2(45, 0)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1899578880]
 shape = SubResource("CircleShape2D_a3pup")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=1935487715]
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,26 +1,38 @@
-[gd_scene load_steps=6 format=3 uid="uid://bvj3uq2f1rfyn"]
+[gd_scene format=3 uid="uid://bvj3uq2f1rfyn"]
 
 [ext_resource type="Texture2D" uid="uid://cdwgwm5jc1ejp" path="res://assets/tank/tankBody_bigRed_outline.png" id="1_dovo2"]
 [ext_resource type="Script" uid="uid://d4ihes32w322m" path="res://scenes/player/player.gd" id="1_gmlin"]
 [ext_resource type="Texture2D" uid="uid://m2misqtoyrny" path="res://assets/tank/specialBarrel3_outline.png" id="2_gmlin"]
 [ext_resource type="PackedScene" uid="uid://bykpmiqhe63bo" path="res://scenes/player_bullet/player_bullet.tscn" id="2_lvxji"]
+[ext_resource type="AudioStream" uid="uid://b0ydnq0s48c15" path="res://assets/sound/shoot.wav" id="5_75vfm"]
+[ext_resource type="AudioStream" uid="uid://w03nkic88tbl" path="res://assets/sound/engine.ogg" id="6_0owmy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dovo2"]
 size = Vector2(54, 46)
 
-[node name="Player" type="Area2D" groups=["Player"]]
+[node name="Player" type="Area2D" unique_id=1036522838 groups=["Player"]]
 script = ExtResource("1_gmlin")
 bullet_scene = ExtResource("2_lvxji")
 
-[node name="Base" type="Sprite2D" parent="."]
+[node name="Base" type="Sprite2D" parent="." unique_id=534331119]
 texture = ExtResource("1_dovo2")
 
-[node name="Gun" type="Sprite2D" parent="."]
+[node name="Gun" type="Sprite2D" parent="." unique_id=1724215709]
 texture = ExtResource("2_gmlin")
 offset = Vector2(8, 0)
 
-[node name="Marker2D" type="Marker2D" parent="Gun"]
+[node name="Marker2D" type="Marker2D" parent="Gun" unique_id=1387882399]
 position = Vector2(32, 0)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=505160647]
 shape = SubResource("RectangleShape2D_dovo2")
+
+[node name="ShootSound" type="AudioStreamPlayer" parent="." unique_id=783970865]
+stream = ExtResource("5_75vfm")
+volume_db = -20.0
+autoplay = true
+
+[node name="EngineSound" type="AudioStreamPlayer" parent="." unique_id=25243155]
+stream = ExtResource("6_0owmy")
+volume_db = -10.0
+autoplay = true

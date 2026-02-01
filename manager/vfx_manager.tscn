@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://cue8uwyfxcx5r"]
+
+[ext_resource type="AudioStream" uid="uid://d3raoism3eq5x" path="res://assets/sound/Explosion.WAV" id="1_5m7sr"]
+[ext_resource type="Script" uid="uid://c2p4cybvkhgku" path="res://manager/vfx_manager.gd" id="1_pb5xb"]
+[ext_resource type="PackedScene" uid="uid://cjfcxfbyyhwmm" path="res://scenes/vfx/exp_anim.tscn" id="2_2n5nc"]
+
+[node name="VFXManager" type="Node2D" unique_id=625682717]
+script = ExtResource("1_pb5xb")
+exp_anim_scene = ExtResource("2_2n5nc")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=366733784]
+stream = ExtResource("1_5m7sr")
+volume_db = -20.0

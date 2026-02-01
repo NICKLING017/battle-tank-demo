@@ -1,15 +1,16 @@
 extends Area2D
 
-@export var player: Node2D ## 玩家节点
 @export var bullet_scene: PackedScene ## 子弹场景
+@export var health: int = 3 ## 初始血量
 
 @onready var gun: Sprite2D = $Gun
 @onready var marker_2d: Marker2D = $Gun/Marker2D
 @onready var timer: Timer = $Timer
-
+@onready var player = get_tree().get_first_node_in_group("Player")
 
 func _ready() -> void:
 	timer.start(1)
+	Gamemanager.player_killed.connect(on_player_killed)
 
 
 func _process(_delta: float) -> void:
@@ -36,3 +37,16 @@ func shoot():
 func _on_timer_timeout() -> void:
 	shoot()
 	timer.start(randf_range(1, 3)) # 随机冷却时间
+
+
+func reduce_health():
+	if health > 0:
+		health -= 1
+	if health <= 0:
+		Gamemanager.enemy_killed.emit(global_position)
+		queue_free()
+
+
+func on_player_killed():
+	timer.stop() # 玩家死亡后不再发射炮弹
+	
