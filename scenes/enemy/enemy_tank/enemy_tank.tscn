@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cd2r016pdkf5v"]
 
-[ext_resource type="Script" uid="uid://2pvnsefuujg5" path="res://scenes/enemy_tank/enemy_tank.gd" id="1_746pd"]
+[ext_resource type="Script" uid="uid://2pvnsefuujg5" path="res://scenes/enemy/enemy_tank/enemy_tank.gd" id="1_746pd"]
 [ext_resource type="Texture2D" uid="uid://cafjym7wb6vp8" path="res://assets/tank/tankBody_blue_outline.png" id="1_jw2gp"]
 [ext_resource type="Material" uid="uid://q00a723y7b0o" path="res://tres/flash.tres" id="1_ybdyp"]
 [ext_resource type="PackedScene" uid="uid://vm5tq5gqbi3x" path="res://components/weapon_component.tscn" id="2_6v6u6"]

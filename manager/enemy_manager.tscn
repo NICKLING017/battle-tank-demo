@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://d0wfj6q0kv5n4"]
 
 [ext_resource type="Script" uid="uid://b84aa2uirsas0" path="res://manager/enemy_manager.gd" id="1_fq440"]
-[ext_resource type="PackedScene" uid="uid://cd2r016pdkf5v" path="res://scenes/enemy_tank/enemy_tank.tscn" id="2_46ilc"]
+[ext_resource type="PackedScene" uid="uid://cd2r016pdkf5v" path="res://scenes/enemy/enemy_tank/enemy_tank.tscn" id="2_46ilc"]
 
 [node name="EnemyManager" type="Node" unique_id=1925048456]
 script = ExtResource("1_fq440")

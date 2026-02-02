@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cale0u3qgrrgi" path="res://assets/item/towerDefense_tile181.png" id="1_npj5y"]
 [ext_resource type="Material" uid="uid://q00a723y7b0o" path="res://tres/flash.tres" id="1_rtg2h"]
-[ext_resource type="Script" uid="uid://ccg217juryp8i" path="res://scenes/enemy_tower/enemy_tower.gd" id="2_dwadc"]
+[ext_resource type="Script" uid="uid://ccg217juryp8i" path="res://scenes/enemy/enemy_tower/enemy_tower.gd" id="2_dwadc"]
 [ext_resource type="PackedScene" uid="uid://vm5tq5gqbi3x" path="res://components/weapon_component.tscn" id="2_nxue2"]
 [ext_resource type="PackedScene" uid="uid://b7ypm8y2x08wg" path="res://components/hurt_box_component.tscn" id="3_rtg2h"]
 [ext_resource type="PackedScene" uid="uid://ipeoo57edm8" path="res://components/detect_component.tscn" id="4_dwadc"]

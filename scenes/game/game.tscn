@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://cvs8n5p1v6tfp" path="res://scenes/map/map.tscn" id="1_0sr1o"]
 [ext_resource type="PackedScene" uid="uid://cue8uwyfxcx5r" path="res://manager/vfx_manager.tscn" id="1_5i0tg"]
 [ext_resource type="PackedScene" uid="uid://bvj3uq2f1rfyn" path="res://scenes/player/player.tscn" id="2_kelw5"]
-[ext_resource type="PackedScene" uid="uid://bink1db6hm0le" path="res://scenes/enemy_tower/enemy_tower.tscn" id="3_lfrn8"]
+[ext_resource type="PackedScene" uid="uid://bink1db6hm0le" path="res://scenes/enemy/enemy_tower/enemy_tower.tscn" id="3_lfrn8"]
 [ext_resource type="PackedScene" uid="uid://be5x6o1bgy7f6" path="res://scenes/ui/hud.tscn" id="4_kelw5"]
 [ext_resource type="PackedScene" uid="uid://d0wfj6q0kv5n4" path="res://manager/enemy_manager.tscn" id="5_bdhmt"]
 [ext_resource type="PackedScene" uid="uid://b2taeqbp8j1lq" path="res://manager/pickup_manager.tscn" id="6_87uf6"]

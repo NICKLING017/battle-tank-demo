@@ -24,6 +24,6 @@ func check_death():
 		died.emit() # 触发死亡信号
 
 # 负责血量升级逻辑
-func upgrade(value):
+func upgrade(value: float = 1.0):
 	current_health = min(max_health, current_health + value)
 	health_changed.emit(get_health_percent())

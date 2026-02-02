@@ -4,5 +4,5 @@
 
 [resource]
 shader = ExtResource("1_phxy2")
-shader_parameter/active = false
+shader_parameter/active = true
 shader_parameter/flash_color = Color(1, 1, 1, 1)
