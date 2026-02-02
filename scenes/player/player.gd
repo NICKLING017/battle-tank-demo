@@ -82,9 +82,9 @@ func _on_timer_timeout() -> void:
 	can_shake = false
 
 
-func upgrade_weapon():
-	weapon_component.upgrade()
+func upgrade_weapon(value: float = 0.1):
+	weapon_component.upgrade(value)
 
 
-func upgrade_health():
-	health_component.upgrade()
+func upgrade_health(value: float = 1.0):
+	health_component.upgrade(value)

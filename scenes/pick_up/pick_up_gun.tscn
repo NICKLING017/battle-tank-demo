@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dop6g8vd5o2mn" path="res://assets/item/bolt_gold.png" id="2_pbb2h"]
 
 [node name="PickUpGun" unique_id=100691470 instance=ExtResource("1_nr26g")]
+pickup_type = 0
 
 [node name="Sprite2D" parent="." index="0" unique_id=529455490]
 texture = ExtResource("2_pbb2h")

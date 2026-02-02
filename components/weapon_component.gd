@@ -32,7 +32,7 @@ func target(target_pos: Vector2):
 	look_at(target_pos)
 
 
-func upgrade(value):
+func upgrade(value: float = 0.1):
 	cool_down = max(min_cool_down, cool_down-value)
 
 
