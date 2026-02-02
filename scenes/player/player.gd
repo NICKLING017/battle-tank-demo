@@ -1,70 +1,90 @@
-extends Area2D
+extends CharacterBody2D
 
-var direction: Vector2 = Vector2.ZERO # 方向
-var target_pos: Vector2 = Vector2.ZERO # 鼠标指向位置
-var speed: float = 0 # 移动速度
-var health: int = 10 # 初始血量
+var direction: Vector2 = Vector2.ZERO  #方向控制
+var speed: float = 0  #速度控制
+var can_shake := false  #控制镜头抖动
 
-@export var max_speed: float = 300 ## 最大移动速度
-@export var bullet_scene: PackedScene ## 炮弹场景
-
-@onready var gun: Sprite2D = $Gun
-@onready var marker_2d: Marker2D = $Gun/Marker2D
-@onready var shoot_sound: AudioStreamPlayer = $ShootSound
-
+@export var max_speed : float = 300 ## 最大速度
+@onready var engine_sound: AudioStreamPlayer = $EngineSound
+@onready var weapon_component: Node2D = $WeaponComponent
+@onready var trail_compoment: Node2D = $TrailCompoment
+@onready var health_component: Node = $HealthComponent
+@onready var hurt_box_component: Area2D = $HurtBoxComponent
+@onready var camera_2d: Camera2D = $Camera2D
+@onready var timer: Timer = $Timer
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 func _ready() -> void:
-	Gamemanager.player_killed.connect(on_player_killed)
+	hurt_box_component.get_damage.connect(health_component.get_damage)
+	hurt_box_component.get_damage.connect(on_get_damage)
+	health_component.health_changed.connect(on_health_changed)
+	health_component.died.connect(on_died)
+	Gamemanager.player_win.connect(on_player_win)
 
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	move(delta)
-	target()
-	shoot()
+	if can_shake:
+		shake()
 
 
 func move(delta):
 	direction = Input.get_vector("left", "right", "up", "down")
 	if direction != Vector2.ZERO:
-		var angle_rad = direction.angle()
-		rotation = rotate_toward(rotation, angle_rad, 2 * PI * delta) # 确保坦克朝向和方向一致
+		var angle_red = direction.angle() # 取得夹角
+		rotation = rotate_toward(rotation, angle_red, 2 * PI * delta)
 		speed = move_toward(speed, max_speed, max_speed * delta)
-	else :
-		speed = move_toward(speed, 0, 2 * max_speed * delta) # 减速得更快 是加速的2倍
+		trail_compoment.start()
+	else:
+		speed = move_toward(speed, 0, 2 * max_speed * delta)
+		trail_compoment.stop()
 	
-	#print(speed)
-	position += transform.x * speed * delta
-	check_border()
+	velocity = transform.x * speed # 方向 * 速度值 = 移动速度
+	move_and_slide()
 
 
-func check_border():
-	var size = get_viewport_rect().size # 返回视口边界 Vector2
-	position = position.clamp(Vector2.ZERO, size) # 限定位置在窗口内
+func shake(): # 镜头晃动
+	camera_2d.offset = Vector2(randf_range(-3,3),randf_range(-3,3))
 
 
-func target():
-	target_pos = get_global_mouse_position() # 目标位置 = 鼠标位置 
-	gun.look_at(target_pos)
+func _unhandled_input(event: InputEvent): # 处理没有被UI控件等处理的输入 防止点击按钮的同时还发射子弹
+	# print("shoot")
+	var target_pos = get_global_mouse_position() # 获取鼠标的世界坐标
+	weapon_component.target(target_pos)
+	if event.is_action_pressed("shoot"):
+		weapon_component.shoot(target_pos)
 
 
-func shoot():
-	if Input.is_action_just_pressed("shoot"):
-		shoot_sound.play()
-		print("发射子弹" + str(target_pos))
-		var bullet = bullet_scene.instantiate() as Area2D
-		bullet.global_position = marker_2d.global_position
-		bullet.look_at(target_pos)
-		bullet.top_level = true
-		add_child(bullet)
+func on_get_damage(value):
+	animation_player.play("flash")
+	can_shake = true
+	timer.start()
+	
 
 
-func reduce_health():
-	if health > 0:
-		health -=1
-		Gamemanager.update_health_ui.emit(health)
-	if health <= 0:
-		Gamemanager.player_killed.emit()
+func on_health_changed(health):
+	Gamemanager.update_health_ui.emit(health)
 
 
-func on_player_killed():
-	set_process(false) # 停止玩家进程
+func on_died():
+	Gamemanager.entity_died.emit(global_position, get_groups()) # 获取死亡单位的分组
+	Gamemanager.player_killed.emit()
+	set_physics_process(false) # 禁止玩家控制
+	hide() # 隐藏自身
+	hurt_box_component.set_deferred("monitorable", false) # 关闭监测区域
+
+
+func on_player_win():
+	set_physics_process(false) # 禁止玩家控制
+
+
+func _on_timer_timeout() -> void:
+	can_shake = false
+
+
+func upgrade_weapon():
+	weapon_component.upgrade()
+
+
+func upgrade_health():
+	health_component.upgrade()

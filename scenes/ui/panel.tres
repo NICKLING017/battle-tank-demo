@@ -1,0 +1,11 @@
+[gd_resource type="StyleBoxTexture" format=3 uid="uid://chq03bw1ufmex"]
+
+[ext_resource type="Texture2D" uid="uid://b2cfi7rdkt4v2" path="res://assets/UI/tile_0029.png" id="1_i3ymw"]
+
+[resource]
+texture = ExtResource("1_i3ymw")
+texture_margin_left = 10.0
+texture_margin_top = 10.0
+texture_margin_right = 10.0
+texture_margin_bottom = 10.0
+expand_margin_top = 5.0

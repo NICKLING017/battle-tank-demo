@@ -1,6 +1,35 @@
 [gd_scene format=3 uid="uid://be5x6o1bgy7f6"]
 
 [ext_resource type="Script" uid="uid://drdmkkl0ypb0j" path="res://scenes/ui/hud.gd" id="1_0mwgc"]
+[ext_resource type="StyleBox" uid="uid://chq03bw1ufmex" path="res://scenes/ui/panel.tres" id="2_hqnrr"]
+[ext_resource type="LabelSettings" uid="uid://c0akqd8gebtm" path="res://scenes/ui/font35.tres" id="3_bo48s"]
+[ext_resource type="FontFile" uid="uid://bics5nbgr70ll" path="res://assets/font/Rockboxcond12.ttf" id="4_8qguk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bo48s"]
+bg_color = Color(0.42792007, 0.7380956, 0.9373559, 1)
+border_width_left = 3
+border_width_top = 8
+border_width_right = 6
+border_width_bottom = 3
+border_color = Color(0.20814666, 0.5875735, 0.71094066, 1)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8qguk"]
+bg_color = Color(0.972549, 0, 0, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 12
+border_color = Color(0.57925403, 1.0348111e-06, 3.85046e-07, 1)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [node name="HUD" type="Control" unique_id=152115386]
 layout_mode = 3
@@ -33,15 +62,18 @@ size_flags_vertical = 0
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 size_flags_horizontal = 2
+theme_override_styles/panel = ExtResource("2_hqnrr")
 
 [node name="Label" type="Label" parent="MarginContainer/HBoxContainer/PanelContainer" unique_id=110439904]
 layout_mode = 2
 text = "Killed: 0"
+label_settings = ExtResource("3_bo48s")
 
 [node name="PanelContainer2" type="PanelContainer" parent="MarginContainer/HBoxContainer" unique_id=1516641164]
 custom_minimum_size = Vector2(500, 50)
 layout_mode = 2
 size_flags_horizontal = 8
+theme_override_styles/panel = ExtResource("2_hqnrr")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/PanelContainer2" unique_id=1273812399]
 layout_mode = 2
@@ -49,14 +81,17 @@ layout_mode = 2
 [node name="Label" type="Label" parent="MarginContainer/HBoxContainer/PanelContainer2/HBoxContainer" unique_id=323585522]
 layout_mode = 2
 text = "Health:"
+label_settings = ExtResource("3_bo48s")
 
 [node name="ProgressBar" type="ProgressBar" parent="MarginContainer/HBoxContainer/PanelContainer2/HBoxContainer" unique_id=843095735]
 custom_minimum_size = Vector2(400, 20)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_bo48s")
+theme_override_styles/fill = SubResource("StyleBoxFlat_8qguk")
 step = 1.0
-value = 50.0
+value = 100.0
 
 [node name="PanelContainer3" type="PanelContainer" parent="MarginContainer" unique_id=906543485]
 visible = false
@@ -64,11 +99,25 @@ custom_minimum_size = Vector2(400, 100)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme_override_styles/panel = ExtResource("2_hqnrr")
 
-[node name="result" type="Label" parent="MarginContainer/PanelContainer3" unique_id=576251327]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer3" unique_id=48468316]
+layout_mode = 2
+
+[node name="result" type="Label" parent="MarginContainer/PanelContainer3/VBoxContainer" unique_id=576251327]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
-text = "You Win"
+text = "You Win!"
+label_settings = ExtResource("3_bo48s")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="MarginContainer/PanelContainer3/VBoxContainer" unique_id=1994804221]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("4_8qguk")
+theme_override_font_sizes/font_size = 30
+text = "Continue"
 
 [node name="Timer" type="Timer" parent="." unique_id=455140535]
 one_shot = true

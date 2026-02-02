@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://b8qwyg2hfatnr"]
+
+[ext_resource type="Script" uid="uid://bmjohx0egqpuq" path="res://scenes/bullet_trail/bullet_trail.gd" id="1_y8x6v"]
+
+[sub_resource type="Curve" id="Curve_y8x6v"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="Gradient" id="Gradient_2ut36"]
+colors = PackedColorArray(0, 0, 0, 1, 0.9267806, 0, 0.103974275, 1)
+
+[node name="BulletTrail" type="Line2D" unique_id=257433438]
+top_level = true
+width_curve = SubResource("Curve_y8x6v")
+gradient = SubResource("Gradient_2ut36")
+script = ExtResource("1_y8x6v")
+length = 12

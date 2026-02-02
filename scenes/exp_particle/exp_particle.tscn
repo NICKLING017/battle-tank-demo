@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://cfbeeln67lvav"]
+
+[ext_resource type="Texture2D" uid="uid://dnjyetfe7u8xu" path="res://assets/VFX/white_glowing_circle.png" id="1_vh2mf"]
+
+[sub_resource type="Curve" id="Curve_vh2mf"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.64746946, 0.58335066), -2.0670142, -2.0670142, 0, 0, Vector2(1, 0.20187306), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_fpqef"]
+offsets = PackedFloat32Array(0, 0.23688969, 0.45207956, 0.72875226, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 0.7666667, 0, 1, 0.77807117, 0.627279, 1.1551381e-06, 1, 0.88, 0, 0.014666443, 1, 1, 1, 1, 0)
+
+[node name="ExpParticle" type="CPUParticles2D" unique_id=1338448318]
+emitting = false
+amount = 12
+texture = ExtResource("1_vh2mf")
+lifetime = 0.2
+one_shot = true
+explosiveness = 1.0
+randomness = 0.3
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 200.0
+initial_velocity_max = 300.0
+damping_min = 100.0
+damping_max = 200.0
+scale_amount_min = 0.0
+scale_amount_max = 0.4
+scale_amount_curve = SubResource("Curve_vh2mf")
+color_ramp = SubResource("Gradient_fpqef")

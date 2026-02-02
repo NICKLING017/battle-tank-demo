@@ -1,0 +1,89 @@
+[gd_scene format=3 uid="uid://bink1db6hm0le"]
+
+[ext_resource type="Texture2D" uid="uid://cale0u3qgrrgi" path="res://assets/item/towerDefense_tile181.png" id="1_npj5y"]
+[ext_resource type="Material" uid="uid://q00a723y7b0o" path="res://tres/flash.tres" id="1_rtg2h"]
+[ext_resource type="Script" uid="uid://ccg217juryp8i" path="res://scenes/enemy_tower/enemy_tower.gd" id="2_dwadc"]
+[ext_resource type="PackedScene" uid="uid://vm5tq5gqbi3x" path="res://components/weapon_component.tscn" id="2_nxue2"]
+[ext_resource type="PackedScene" uid="uid://b7ypm8y2x08wg" path="res://components/hurt_box_component.tscn" id="3_rtg2h"]
+[ext_resource type="PackedScene" uid="uid://ipeoo57edm8" path="res://components/detect_component.tscn" id="4_dwadc"]
+[ext_resource type="PackedScene" uid="uid://7dnxuv4qxtvj" path="res://scenes/bullet/enemy_bullet.tscn" id="5_l1tq7"]
+[ext_resource type="PackedScene" uid="uid://woybdhyrf7g1" path="res://components/health_component.tscn" id="5_lab6q"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6evot"]
+radius = 30.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_l1tq7"]
+radius = 25.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nxue2"]
+radius = 350.0
+
+[sub_resource type="Animation" id="Animation_dwadc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/active")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_lab6q"]
+resource_name = "flash"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/active")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l1tq7"]
+_data = {
+&"RESET": SubResource("Animation_dwadc"),
+&"flash": SubResource("Animation_lab6q")
+}
+
+[node name="EnemyTower" type="StaticBody2D" unique_id=1112055259 groups=["Enemy", "EnemyTower"]]
+material = ExtResource("1_rtg2h")
+collision_layer = 64
+collision_mask = 32
+script = ExtResource("2_dwadc")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=261981897]
+texture = ExtResource("1_npj5y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1797747699]
+shape = SubResource("CircleShape2D_6evot")
+
+[node name="WeaponComponent" parent="." unique_id=913563215 instance=ExtResource("2_nxue2")]
+bullet_scene = ExtResource("5_l1tq7")
+
+[node name="HurtBoxComponent" parent="." unique_id=990027330 instance=ExtResource("3_rtg2h")]
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBoxComponent" unique_id=1509634239]
+shape = SubResource("CircleShape2D_l1tq7")
+
+[node name="DetectComponent" parent="." unique_id=149659075 instance=ExtResource("4_dwadc")]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectComponent" unique_id=2126120596]
+shape = SubResource("CircleShape2D_nxue2")
+
+[node name="HealthComponent" parent="." unique_id=617370691 instance=ExtResource("5_lab6q")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1477246203]
+libraries/ = SubResource("AnimationLibrary_l1tq7")

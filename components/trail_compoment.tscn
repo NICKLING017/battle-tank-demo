@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://cpg3a1uxob680"]
+
+[ext_resource type="Script" uid="uid://01ljo77ytecs" path="res://components/trail_compoment.gd" id="1_j5lcc"]
+[ext_resource type="PackedScene" uid="uid://cl2kx2shdsg4a" path="res://scenes/tank_trail/tank_trail.tscn" id="2_rwpvo"]
+
+[node name="TrailCompoment" type="Node2D" unique_id=178151400]
+script = ExtResource("1_j5lcc")
+trail_scene = ExtResource("2_rwpvo")
+
+[node name="Timer" type="Timer" parent="." unique_id=1942035278]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

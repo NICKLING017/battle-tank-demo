@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://cksp4boy3lrk6"]
+
+[ext_resource type="PackedScene" uid="uid://cfx4q4dyrqer6" path="res://scenes/pick_up/pick_up.tscn" id="1_7m4g3"]
+[ext_resource type="Texture2D" uid="uid://dax17hd3jts4b" path="res://assets/item/shield_gold.png" id="2_o5rkd"]
+
+[node name="PickUpHealth" unique_id=100691470 instance=ExtResource("1_7m4g3")]
+
+[node name="Sprite2D" parent="." index="0" unique_id=529455490]
+texture = ExtResource("2_o5rkd")
